@@ -1,0 +1,32 @@
+import os
+import time
+import torch
+import torchvision.models as models
+import torchvision.transforms as transforms
+from PIL import Image
+import numpy as np
+
+# --------------------------
+# 1. 开发机基础环境信息
+# --------------------------
+print("="*50)
+print("📌 腾讯云TI平台开发机环境信息")
+print("="*50)
+print(f"Python版本: {os.popen('python --version').read().strip()}")
+print(f"PyTorch版本: {torch.__version__}")
+print(f"CUDA是否可用: {torch.cuda.is_available()}")
+print(f"GPU数量: {torch.cuda.device_count()}")
+
+# 打印每张GPU的详细信息
+for i in range(torch.cuda.device_count()):
+    props = torch.cuda.get_device_properties(i)
+    print(f"\nGPU {i}: {props.name}")
+    print(f"  总显存: {props.total_memory / 1024**3:.2f} GB")
+    print(f"  多处理器数量: {props.multi_processor_count}")
+
+# --------------------------
+# 2. GPU调用基础测试
+# --------------------------
+print("\n" + "="*50)
+print("⚡ GPU基础调用测试")
+print("="*50)
